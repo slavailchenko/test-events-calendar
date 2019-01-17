@@ -16,7 +16,7 @@ class Header extends Component {
 
   render() {
     const { user, loginLoading, authLoading, loginUserFail } = this.props;
-    console.log(this.props);
+    console.log('loginLoading '+this.props.loginLoading);
 
     const iconElementRight = user ? (
       <HeadMenu user={user} />

@@ -70,7 +70,7 @@ export const authorize = authToken => dispatch => {
 
   dispatch(authUserStart())
   axios({
-    method: 'get',
+    method: 'GET',
     url: '/api/v1/users/me',
     headers: { Authorization: authToken }
   })

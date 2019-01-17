@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const helmet = require('helmet');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
@@ -20,9 +21,10 @@ mongoose.connect().then(()=> new Promise ((res, rej) => {
   app.use(bodyParser.json({limit: "50mb"}));
   app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:500}));
   app.use(cors());
+  app.use(helmet());
   app.use(expressValidator());
 
-  app.disable('x-powered-by');
+  // app.disable('x-powered-by');
 
   // app.use(express.static(path.resolve(__dirname, '../../client/build')));
 

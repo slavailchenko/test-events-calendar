@@ -25,7 +25,8 @@ const reducer = (state = initialState, action) => {
         error: null
       }
     case LOGIN_USER_SUCCESS:
-      localStorage.setItem('AUTH_TOKEN', action.payload.token)
+      localStorage.setItem('AUTH_TOKEN', action.payload.token);
+      console.log(action.payload.user);
       return {
         ...state,
         user: action.payload.user,
