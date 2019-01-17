@@ -21,6 +21,7 @@ class DeleteEventDialog extends Component {
 
   render() {
     const { loading, hideDeleteEventDialog, deleteEvent, event } = this.props;
+    console.log(event);
 
     const actions = [
       <FlatButton label="Cancel" onClick={hideDeleteEventDialog} />,

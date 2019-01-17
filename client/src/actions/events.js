@@ -79,7 +79,9 @@ export const deleteEventFail = payload => ({
 });
 
 export const deleteEvent = event => dispatch => {
-  const result = () => {
+  const onSuccess = () => {
+    console.log('event');
+    console.log(event);
     dispatch(deleteEventSuccess({ event: event }));
     dispatch(hideDeleteEventDialog());
     dispatch(showNotify({ 
@@ -89,18 +91,21 @@ export const deleteEvent = event => dispatch => {
   };
 
   if (!store.getState().auth.user) {
-    return result()
+    return onSuccess()
   };
 
   const authToken = localStorage.getItem('AUTH_TOKEN');
 
   dispatch(deleteEventStart())
   axios({
-    method: 'delete',
+    method: 'DELETE',
     url: `api/v1/events/${event._id}`,
     headers: { Authorization: authToken }
   })
-    .then(res => result())
+    .then(res => {
+      console.log(res.data);
+      onSuccess()
+    })
     .catch(err => {
       let error = err.response && err.response.data ? err.response.data : err;
       dispatch(deleteEventFail(error));

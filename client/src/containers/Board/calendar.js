@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { showDeleteEventDialog } from '../../actions/eventDialog';
+import { showRemoveEventDialog } from '../../actions/eventDialog';
 
 import './calendar.scss';
 
@@ -84,7 +84,7 @@ class Calendar extends Component {
   }
 
   render() {
-    const { beginningHour, endHour, showDeleteEventDialog } = this.props;
+    const { beginningHour, endHour, showRemoveEventDialog } = this.props;
     const { eventsContainerWidth, events } = this.state;
 
     const timeRange = _.range((endHour - beginningHour) * 2 + 1).map(
@@ -97,7 +97,7 @@ class Calendar extends Component {
           {events.map((event, i) => (
             <div
               className="event"
-              onClick={() => showDeleteEventDialog(event)}
+              onClick={() => showRemoveEventDialog(event)}
               style={{
                 top: event.startSlotIndex * timeSlotHeigth + 'px',
                 left: Math.min(eventsContainerWidth / event.columnsNumber, timeSlotMaxWidth) * event.number + 'px',
@@ -132,7 +132,7 @@ Calendar.propTypes = {
   beginningHour: PropTypes.number.isRequired,
   endHour: PropTypes.number.isRequired,
   stepMinute: PropTypes.number.isRequired,
-  showDeleteEventDialog: PropTypes.func.isRequired
+  showRemoveEventDialog: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -140,7 +140,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  showDeleteEventDialog: event => dispatch(showDeleteEventDialog(event))
+  showRemoveEventDialog: event => dispatch(showRemoveEventDialog(event))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calendar);
